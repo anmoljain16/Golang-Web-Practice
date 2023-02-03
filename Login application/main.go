@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"time"
 )
 
 func handlefunc(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +90,13 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = t.ExecuteTemplate(w, filename, "Login Page template")
+	type Ninja struct {
+		Name string `json:"name"`
+		Time string `json:"time"`
+	}
+	dt := time.Now()
+
+	err = t.ExecuteTemplate(w, filename, Ninja{Name: "Login Page", Time: dt.Format("15:04:05")})
 	if err != nil {
 		fmt.Println("Error when executing template", err)
 		return
