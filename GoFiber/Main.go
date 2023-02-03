@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/requestid"
+)
 
 type Fullname struct {
 	FirstName string
@@ -31,11 +35,14 @@ func postAnmol(ctx *fiber.Ctx) error {
 
 func main() {
 	app := fiber.New()
+	app.Use(logger.New())
+	app.Use(requestid.New())
 	app.Get("/", func(ctx *fiber.Ctx) error {
 		return ctx.SendString("Hello World")
 	})
 
-	app.Get("/anmol", getAnmol)
-	app.Post("/anmol", postAnmol)
+	appgroup := app.Group("/anmol")
+	appgroup.Get("", getAnmol)
+	appgroup.Post("", postAnmol)
 	app.Listen(":80")
 }
