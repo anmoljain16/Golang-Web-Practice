@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>{{.}}</title>
 </head>
 <body>
-    <h1>Login Page</h1>
-    <form method="post" action="/login-submit">
+    <h1>{{.}}</h1>
+    <form  action="/login-submit">
         <label for="name"><b>Username:</b></label> <br>
         <input type="text" name="name" id="name" placeholder="Enter name"> <br> <br>
         <label for="password"><b>Password:</b></label><br>
-        <input type="password" name="password" id="password" placeholder="Enter Password"><br>
+        <input type="text" name="password" id="password" placeholder="Enter Password"><br>
         <br>
         <input type = "submit" value="Submit"><br>
     </form>
